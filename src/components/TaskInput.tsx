@@ -7,21 +7,25 @@ const TaskInputWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const Input = styled.input`
+const TextArea = styled.textarea`
   padding: 10px;
   font-size: 16px;
   width: calc(100% - 22px);
-  margin-right: 10px;
+  margin-bottom: 10px; /* Add bottom margin for spacing */
+  resize: vertical; /* Allow vertical resizing */
 `;
 
 const Button = styled.button`
   padding: 10px;
   font-size: 16px;
-  color:green;
-  margin-top:10px;
-  box-shadow:2px 2px 5px green;
-  width:100px
-  
+  color: green;
+  margin-top: 10px;
+  box-shadow: 2px 2px 5px green;
+  width: 100px;
+
+  @media screen and (max-width: 768px) {
+    width: 50%; /* Set button width to 50% of the container for smaller screens */
+  }
 `;
 
 const TaskInput: React.FC = () => {
@@ -39,12 +43,11 @@ const TaskInput: React.FC = () => {
   return (
     <TaskInputWrapper>
       <form onSubmit={handleSubmit}>
-        <Input
-          type="text"
+        <TextArea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Add a new task"
-          
+          rows={3} // Set the number of rows for textarea
         />
         <Button type="submit">Add</Button>
       </form>

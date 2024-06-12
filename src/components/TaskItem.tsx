@@ -6,22 +6,43 @@ import { deleteTask, toggleTaskCompletion, editTask } from '../features/tasks/ta
 
 const Item = styled.li<{ completed: boolean }>`
   display: flex;
+  flex-direction: column; /* Change to column for smaller screens */
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Align items at the start */
   padding: 10px;
   background-color: ${props => (props.completed ? '#d3ffd3' : '#fff')};
   margin-bottom: 10px;
   border-radius: 4px;
-  border:1px solid grey
+  border: 1px solid grey;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row; /* Change back to row layout for larger screens */
+    align-items: center; /* Center align items horizontally */
+  }
 `;
 
 const Text = styled.span<{ completed: boolean }>`
   text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
+  font-size: 14px; 
+  word-wrap: break-word; 
+  white-space: pre-line;
+  overflow: hidden;
+  width: 90%;
+  margin-bottom: 5px; /* Add spacing between text and buttons */
+
+  @media screen and (min-width: 768px) {
+    flex: 1; /* Allow text to grow and take up remaining space */
+    margin-bottom: 0; /* Remove bottom margin for larger screens */
+  }
 `;
 
 const Button = styled.button`
-  margin-left: 10px;
-  font-size: 14px;
+  margin-left: 5px; 
+  font-size: 12px; 
+
+  @media screen and (min-width: 768px) {
+    margin-left: 10px; /* Increase margin for larger screens */
+  }
 `;
 
 const TaskItem: React.FC<{ task: Task }> = ({ task }) => {
@@ -47,15 +68,15 @@ const TaskItem: React.FC<{ task: Task }> = ({ task }) => {
   return (
     <Item completed={task.completed}>
       {isEditing ? (
-           <textarea
-           value={editText}
-           onChange={(e) => setEditText(e.target.value)}
-           className="task-edit-textarea"
-         />
+        <textarea
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          className="task-edit-textarea"
+        />
       ) : (
         <Text completed={task.completed}>{task.text}</Text>
       )}
-      <div>
+      <div className='btnCon'>
         <Button onClick={handleToggle}>
           {task.completed ? 'Undo' : 'Complete'}
         </Button>

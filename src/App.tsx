@@ -2,7 +2,7 @@ import React from 'react';
 import TaskInput from './components/TaskInput';
 import TaskList from './components/TaskList';
 import styled from 'styled-components';
-import './App.css'
+import './App.css';
 
 const AppWrapper = styled.div`
   background-color: white;
@@ -15,16 +15,25 @@ const AppWrapper = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 10px;
+    padding: 8px;
+  }
+`;
+
+const Title = styled.h1`
+  color: green;
+  font-size: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 20px; /* Adjust font size for smaller screens */
   }
 `;
 
 const App: React.FC = () => {
   return (
     <AppWrapper>
-      <h1 style={{color:'green'}}>To-Do App</h1>
+      <Title>To-Do App</Title>
       <TaskInput />
-      <TaskList />
+        <TaskList />
     </AppWrapper>
   );
 };

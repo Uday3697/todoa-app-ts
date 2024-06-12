@@ -8,6 +8,18 @@ import TaskItem from './TaskItem';
 const List = styled.ul`
   list-style: none;
   padding: 0;
+  max-height: 400px; /* Set maximum height */
+  overflow-y: auto; /* Add vertical scrollbar when content overflows */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+
+  /* Hide scrollbar in Webkit-based browsers (e.g., Chrome, Safari) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Enable word break */
+  word-break: break-word;
 `;
 
 const TaskList: React.FC = () => {
